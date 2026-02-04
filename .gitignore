@@ -1,0 +1,21 @@
+# Python junk
+__pycache__/
+*.py[cod]
+venv/
+env/
+
+# Databases (Don't upload the test DBs)
+*.db
+*.sqlite3
+*.sql
+
+# Frontend junk (Massive folders)
+node_modules/
+.next/
+dist/
+build/
+.DS_Store
+
+# Logs and Temp files
+*.log
+temp_*
