@@ -54,4 +54,15 @@ You can run the entire infrastructure with a single command. No Python or Node.j
    ```bash
    git clone [https://github.com/Prem-Kt-2522/dpdp-compliance-shield.git](https://github.com/Prem-Kt-2522/dpdp-compliance-shield.git)
    cd dpdp-compliance-shield
-2. Start the Application
+2. **Start the Application**
+   ```bash
+   docker-compose up --build
+
+Wait for backend-1 and frontend-1 to show "Ready".
+3. **Access the Dashboard**
+
+Open: http://localhost:3000
+
+Login: admin123
+
+Password: admin123
