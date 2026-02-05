@@ -1,0 +1,7 @@
+# Ignore huge folders
+**/node_modules
+**/.next
+**/.git
+**/.vscode
+**/__pycache__
+**/*.db
