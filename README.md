@@ -66,3 +66,36 @@ Open: http://localhost:3000
 Login: admin123
 
 Password: admin123
+
+🛠️ Tech Stack & Architecture
+The application follows a Microservices Architecture:
+
+Frontend Container: Next.js 14 (App Router), TypeScript, Tailwind CSS.
+
+Backend Container: Python FastAPI, Uvicorn, SQLAlchemy, Boto3.
+
+Database: SQLite (persisted via Docker Volumes).
+
+Orchestration: Docker Compose (Bridge Network).
+
+Project Structure
+Bash
+├── backend/            # FastAPI Python Server
+│   ├── main.py         # API Entry points
+│   ├── s3_scanner.py   # AWS Logic
+│   └── Dockerfile      # Python Environment
+├── frontend/           # Next.js Dashboard
+│   ├── app/            # Pages & Routes
+│   ├── auth.ts         # NextAuth Security Config
+│   └── Dockerfile      # Node.js Environment
+└── docker-compose.yml  # Infrastructure as Code
+
+Login Page,Security Dashboard,AWS S3 Scan,Pdf report
+<img width="1361" height="626" alt="image" src="https://github.com/user-attachments/assets/a28c7fc1-83e1-43c4-955f-027322ec912a" />
+
+<img width="1348" height="632" alt="image" src="https://github.com/user-attachments/assets/630a5708-95da-4db8-bddc-bb7c87b108b6" />
+
+<img width="1346" height="628" alt="image" src="https://github.com/user-attachments/assets/2a594ccd-ab95-4e55-b64c-f53cc743e8d1" />
+
+<img width="1344" height="628" alt="image" src="https://github.com/user-attachments/assets/fd17aafb-3df4-4dc0-8982-00f91134dd8d" />
+
