@@ -79,7 +79,7 @@ Database: SQLite (persisted via Docker Volumes).
 Orchestration: Docker Compose (Bridge Network).
 
 Project Structure
-Bash
+```Bash
 ├── backend/            # FastAPI Python Server
 │   ├── main.py         # API Entry points
 │   ├── s3_scanner.py   # AWS Logic
@@ -89,7 +89,7 @@ Bash
 │   ├── auth.ts         # NextAuth Security Config
 │   └── Dockerfile      # Node.js Environment
 └── docker-compose.yml  # Infrastructure as Code
-
+```
 Login Page,Security Dashboard,AWS S3 Scan,Pdf report
 <img width="1361" height="626" alt="image" src="https://github.com/user-attachments/assets/a28c7fc1-83e1-43c4-955f-027322ec912a" />
 
