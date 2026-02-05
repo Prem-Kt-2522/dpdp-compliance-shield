@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-multipart
+sqlalchemy
+pymysql
+psycopg2-binary
+reportlab
+boto3
+requests

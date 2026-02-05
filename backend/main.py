@@ -1,6 +1,7 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
+from s3_scanner import scan_s3_bucket
 from pydantic import BaseModel
 from typing import List
 import shutil
@@ -34,6 +35,12 @@ class ReportRequest(BaseModel):
 
 class DBConnectionRequest(BaseModel):
     connection_string: str
+
+class S3ScanRequest(BaseModel):
+    access_key: str
+    secret_key: str
+    bucket_name: str
+    region: str
 
 # --- Endpoints ---
 
@@ -112,3 +119,32 @@ async def generate_pdf(request: ReportRequest):
         media_type="application/pdf", 
         headers={"Content-Disposition": f"attachment; filename=Audit_Report_{request.filename}.pdf"}
     )
+@app.post("/scan-s3/")
+async def scan_s3(request: S3ScanRequest):
+    """
+    FEATURE 4: AWS S3 Cloud Scanner
+    """
+    print(f"[*] Starting S3 Scan for bucket: {request.bucket_name}")
+    
+    findings = scan_s3_bucket(
+        request.access_key, 
+        request.secret_key, 
+        request.bucket_name, 
+        request.region
+    )
+    
+    # Error Handling
+    if isinstance(findings, dict) and "error" in findings:
+         raise HTTPException(status_code=400, detail=findings["error"])
+
+    # Save to History
+    risk_status = "HIGH" if len(findings) > 0 else "LOW"
+    save_scan_result(f"S3 Bucket: {request.bucket_name}", len(findings), risk_status)
+
+    return {
+        "filename": f"AWS S3: {request.bucket_name}",
+        "total_leaks": len(findings),
+        "risk_score": risk_status,
+        "compliance_status": "NON_COMPLIANT" if findings else "COMPLIANT",
+        "details": findings
+    }

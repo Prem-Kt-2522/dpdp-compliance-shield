@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # 1. The Python Backend Service
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app  # Live code reloading!
+    networks:
+      - dpdp-network
+
+  # 2. The Next.js Frontend Service
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      # 1. The Secret (Must be set)
+      - AUTH_SECRET=my_super_secret_password_123
+      
+      # 2. Force Trust (The fix for Docker Login)
+      - AUTH_TRUST_HOST=true
+      
+      # 3. Explicitly set the base URL
+      - AUTH_URL=http://localhost:3000
+      - NEXTAUTH_URL=http://localhost:3000
+      
+      # 4. API URLs
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - INTERNAL_API_URL=http://backend:8000
+    networks:
+      - dpdp-network
+    depends_on:
+      - backend
+
+# --- THIS WAS MISSING ---
+networks:
+  dpdp-network:
+    driver: bridge

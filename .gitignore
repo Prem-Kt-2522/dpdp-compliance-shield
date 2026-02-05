@@ -1,21 +1,20 @@
-# Python junk
-__pycache__/
-*.py[cod]
-venv/
+# Dependencies
+**/node_modules
+**/__pycache__
+**/.env
+**/.venv
 env/
+venv/
 
-# Databases (Don't upload the test DBs)
+# Next.js Build
+**/.next
+**/build
+**/dist
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Database (Don't leak your audit history!)
 *.db
 *.sqlite3
-*.sql
-
-# Frontend junk (Massive folders)
-node_modules/
-.next/
-dist/
-build/
-.DS_Store
-
-# Logs and Temp files
-*.log
-temp_*
